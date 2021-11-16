@@ -1,9 +1,8 @@
 # training_haycockchavez
 
 
-<<<<<<< HEAD
-training repsitory for nceas. Tash is trying to create a conflich
-=======
+
+training repsitory for nceas. Tash is trying to create a conflict
 
 
 *Adding something new to the repo (Jenn McHenry)
