@@ -1,0 +1,37 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Second level header
+
+### Third level header
+
+Plain paragraph text
+
+A new paragraph this is not a new line.
+
+1.  apple
+2.  kiwi
+3.  *pineappple*
+4.  mango
+
+*italic*
+
+1.  item 1
+2.  item 2
+3.  item 3.
+
+## subheader
+
+## sub header
+
+| hi   | language | yes? |
+|------|----------|------|
+| hola | spanish  | yes  |
+|      |          |      |
+|      |          |      |
