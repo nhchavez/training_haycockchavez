@@ -78,5 +78,13 @@ mean_region <- catch_long %>%
 
 
 mean_region
+
+
+```
+```{r} 
+region_defs <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/df35b.303.1") %>% 
+    select(code, mgmtArea)
+
+head(region_defs)
 ```
 
