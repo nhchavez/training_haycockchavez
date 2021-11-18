@@ -1,0 +1,82 @@
+---
+title: "Data Tidying"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message = FALSE}
+library(dplyr)
+library(tidyr)
+library(readr)
+
+```
+
+# Read in data
+Data come from [Mike Byerly. Alaska commercial salmon catches by management region (1886- 1997). Gulf of Alaska Data Portal. df35b.304.2.](https://knb.ecoinformatics.org/view/df35b.304.2)
+
+
+```{r}
+catch_original <- read_csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/df35b.302.1", show_col_types = FALSE)
+
+head(catch_original)
+
+```
+
+# Clean and reshape data
+
+Drop notes and all column
+```{r}
+catch_data <- catch_original %>% 
+  select(Region, Year, Chinook, Sockeye, Coho, Pink, Chum)
+
+head(catch_data)
+```
+
+Coerce Chinooch column to be numeric instead of character
+
+```{r}
+catch_clean <- catch_data %>% 
+  mutate(Chinook = if_else(Chinook == "I", "1", Chinook)) %>% 
+  mutate(Chinook = as.numeric(Chinook))
+
+summary(catch_clean)
+```
+
+
+## Examine NA values
+```{r}
+i <-which(is.na(catch_clean$Chinook))
+i
+catch_original[i, ]
+```
+
+```{r}
+catch_long <- catch_clean %>% 
+  pivot_longer(cols = -c(Region, Year), names_to = "species", values_to = "catch")
+
+head(catch_long)
+
+```
+
+```{r}
+var <- catch_long %>% 
+  filter(Year > 1899) %>% 
+  group_by(species, Year) %>% 
+  summarise(mean_catch = mean(catch), .groups = "drop")
+
+head(var)
+
+```
+
+{r}
+mean_region <- catch_long %>% 
+  group_by(species) %>% 
+  summarise(mean_catch = mean(catch))
+
+
+mean_region
+```
+
